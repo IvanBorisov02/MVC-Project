@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Hirsotram3.Models
+{
+    public class Histogram
+    {
+        public List<int> P1 { get; set; }
+        public List<int> P2 { get; set; }
+        public List<int> P3 { get; set; }
+        public List<int> P4 { get; set; }
+        public List<int> P5 { get; set; }
+
+        public int Count { get; set; }
+
+        public Histogram()
+        {
+            this.P1 = new List<int>();
+            this.P2 = new List<int>();
+            this.P3 = new List<int>();
+            this.P4 = new List<int>();
+            this.P5 = new List<int>();
+        }
+
+        public void FilterNumbers(List<int> numbers)
+        {
+            this.P1 = numbers.Where(x => x < 200).ToList();
+            this.P2 = numbers.Where(x => x < 400 && x >= 200).ToList();
+            this.P3 = numbers.Where(x => x < 600 && x >= 400).ToList();
+            this.P4 = numbers.Where(x => x < 800 && x >= 600).ToList();
+            this.P5 = numbers.Where(x => x >= 800).ToList();
+        }
+
+        public double GetPercent(List<int> numbers)
+        {
+            return (double)numbers.Count() / this.Count * 100;
+        }
+    }
+}
